@@ -32,6 +32,4 @@ OnBoarding(
 List<SignInModel> signinList = [
       SignInModel(title: "Welcome Back" ,details: "Sign in with Your email and password\nor continue with social media"), 
       SignInModel(title: "Welcome Back" ,details: "Sign in with Your email and password\nor continue with social media"), 
-
-
  ]; 
