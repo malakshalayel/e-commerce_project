@@ -1,6 +1,5 @@
 
 import 'package:ecommerce_course/core/localization/local.dart';
-import 'package:ecommerce_course/core/servicvs/services.dart';
 import 'package:ecommerce_course/view/widget/onboarding/translation/custombutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

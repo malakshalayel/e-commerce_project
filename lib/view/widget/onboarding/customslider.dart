@@ -1,5 +1,4 @@
 import 'package:ecommerce_course/controller/onboarding_controller.dart';
-import 'package:ecommerce_course/core/constatnt/constantColor.dart';
 import 'package:ecommerce_course/data/datasource/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

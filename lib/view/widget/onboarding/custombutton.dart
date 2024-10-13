@@ -13,9 +13,9 @@ class CustomButton extends GetView<OnboardingControllerImp> {
         controller.next();
       },
                
-               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 100),
+               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 100),
                color: AppColor.primeryColor, 
-               child: const Text("Continue"),
+               child:  Text("8".tr),
                );
   }
 }

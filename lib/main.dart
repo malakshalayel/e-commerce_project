@@ -1,10 +1,9 @@
-import 'package:ecommerce_course/core/constatnt/constantColor.dart';
+import 'package:ecommerce_course/binding/initlbinding.dart';
 import 'package:ecommerce_course/core/localization/local.dart';
 import 'package:ecommerce_course/core/localization/tarnslation.dart';
-import 'package:ecommerce_course/view/screen/transaltion.dart';
 import 'package:ecommerce_course/core/servicvs/services.dart';
 import 'package:ecommerce_course/routes.dart';
-import 'package:ecommerce_course/view/screen/onboarding.dart';
+import 'package:ecommerce_course/testview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,17 +25,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       translations: MyTranslation(),
       locale: controller.langauge,
+      
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "PlayfairDisblay",
-       textTheme: const TextTheme(
-        headlineSmall: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
-          bodyLarge: TextStyle(height: 2 , color: AppColor.greyColor, fontWeight:FontWeight.w800 ),  // Customize font styles
-          
-        ),
-      ),
-      routes: routes,
-      home:  const Langauge(),
+      theme: controller.appTheme,
+      
+      initialBinding: InitialBinding(),
+     getPages: routes,
     );
   }
 }
