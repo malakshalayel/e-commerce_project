@@ -11,7 +11,7 @@ class SuccessSignUp extends StatelessWidget {
     SuccessSignupControllerImp controller =Get.put(SuccessSignupControllerImp());
     return  Scaffold (
       appBar: AppBar( 
-        title: Text("32".tr, style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColor.greyColor),),
+        title: Text("37".tr, style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColor.greyColor),),
         centerTitle: true,
       ),
        body: Padding(
@@ -21,7 +21,7 @@ class SuccessSignUp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [ 
               const Icon(Icons.check_circle_outline, color: AppColor.primeryColor, size: 200,),
-              Text("36".tr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+              Text("38".tr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
               const Spacer(),
               MaterialButton(onPressed: (){
                   controller.goToSignIn();

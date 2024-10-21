@@ -21,7 +21,7 @@ class TestView extends StatelessWidget {
         } else if (controller.statusRequest == StatusRequest.offlinefailuer) {
           return const Center(child: Text("Offline Failure"));
         } else if (controller.statusRequest == StatusRequest.serverfailuer) {
-          return  Center(child: Lottie.asset(AppImageAsset.serverfailuer, width: 250 , height: 250, renderCache: RenderCache.raster))  ;
+          return  Center(child: Lottie.asset(AppImageAsset.serverfailuerLottie, width: 250 , height: 250, renderCache: RenderCache.raster))  ;
         } else {
           return ListView.builder(
               itemCount: controller.data.length,

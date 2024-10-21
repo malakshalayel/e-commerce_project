@@ -1,53 +1,83 @@
+import 'package:ecommerce_course/core/class/statusrequest.dart';
 import 'package:ecommerce_course/core/constatnt/pageroutes.dart';
+import 'package:ecommerce_course/core/function/handlingdatacontroller.dart';
+import 'package:ecommerce_course/data/datasource/remote/forgetpassword/resetpass.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-abstract class ResetPassController extends GetxController{ 
+abstract class ResetPassController extends GetxController {
   goToSuccessReset();
   showPassword();
 }
 
-class ResetPassControllerImp extends ResetPassController{
+class ResetPassControllerImp extends ResetPassController {
   late TextEditingController passController;
-  late TextEditingController repassController; 
+  late TextEditingController repassController;
+  StatusRequest statusRequest = StatusRequest.none;
+  ResetPasswordData resetPassword = ResetPasswordData(Get.find());
+  String? email;
 
-  GlobalKey<FormState> fromState =GlobalKey<FormState>();
+  GlobalKey<FormState> fromState = GlobalKey<FormState>();
 
   @override
-  goToSuccessReset() {
+  goToSuccessReset() async {
+  var formData = fromState.currentState;
+      if (formData!.validate()) {
+    if (passController.text != repassController.text) {
+      return Get.defaultDialog(
+          title: "warning", middleText: "password not Match");
+    }
 
-    var fromData =fromState.currentState;
-    if(fromData!.validate() && passController.text == repassController.text ){
-      Get.toNamed(AppRoute.successreset);
+    statusRequest = StatusRequest.loading;
+    update();
+    try {
+      var response = await resetPassword.postData( email!,passController.text,);
+      //print("responce data as ${response['data']}");
+      statusRequest = handlingData(response);
+      print("status request after handling $statusRequest ");
+      if (statusRequest == StatusRequest.success) {
+        //data.addAll(response['data']);
+        Get.offNamed(AppRoute.successreset);
+      } else {
+        Get.defaultDialog(title: "wearning", middleText: "Try again");
+      }
+    } catch (error) {
+      print("errer here $error");
     }
-    else{ 
-      print("not valid");
-    }
-    
-  
+    update();
+      }
   }
-   bool isShowPass = true ; 
-   @override
+
+  bool isShowPass = true;
+  @override
   showPassword() {
-     isShowPass=!isShowPass;
-     update();
+    isShowPass = !isShowPass;
+    update();
   }
-  
+
   @override
   void onInit() {
     passController = TextEditingController();
-    repassController=TextEditingController();
-    
+    repassController = TextEditingController();
+       // email = Get.arguments['email'];
+try{
+     if (Get.arguments != null && Get.arguments['email'] != null) {
+    email = Get.arguments['email'];
+  } else {
+    // Handle the case where email is null, for example:
+    Get.defaultDialog(title: "Error", middleText: "Email not provided");
+  } }catch(error){
+    print("${error}");
+  }
+
     super.onInit();
   }
 
- @override
+  @override
   void dispose() {
     passController.dispose();
     repassController.dispose();
-    
+
     super.dispose();
   }
-
-
 }

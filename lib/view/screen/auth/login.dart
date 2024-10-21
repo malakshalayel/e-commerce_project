@@ -1,4 +1,6 @@
 import 'package:ecommerce_course/controller/auth/login_controller.dart';
+import 'package:ecommerce_course/core/class/handlingdataview.dart';
+import 'package:ecommerce_course/core/class/statusrequest.dart';
 import 'package:ecommerce_course/core/constatnt/constantColor.dart';
 import 'package:ecommerce_course/core/constatnt/imageasset.dart';
 import 'package:ecommerce_course/core/function/alertexitapp.dart';
@@ -15,7 +17,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginControllerImp controller = Get.put(LoginControllerImp());
+    Get.put(LoginControllerImp());
     return PopScope(
       onPopInvokedWithResult: (bool didPop, Object? result)async{ 
        if(didPop){ 
@@ -36,7 +38,9 @@ class LoginPage extends StatelessWidget {
       
       
       
-        body:  Container(
+        body:  GetBuilder<LoginControllerImp>(builder: (controller)=> 
+        HandlingDataRequest(statusRequest: controller.statusRequest,
+         widget: Container(
         padding:const EdgeInsets.symmetric(horizontal: 50,vertical: 25),
         child: Form(
           key: controller.formState,
@@ -76,7 +80,7 @@ class LoginPage extends StatelessWidget {
                 onTapicon:() => controller.showPassword(),
                 isNumber: true,
                 valid: (val){ 
-                  return validInput(val!, 8, 20, "password");
+                  return validInput(val!, 3, 20, "password");
                 },
                 myController: controller.passwordController,
                 hinttext: "13".tr,
@@ -127,7 +131,8 @@ class LoginPage extends StatelessWidget {
             ]
           ),
         ),
-              )
+              ))
+        )
       ),
     );
   }

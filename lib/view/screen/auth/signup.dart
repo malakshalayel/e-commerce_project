@@ -1,5 +1,6 @@
 
 import 'package:ecommerce_course/controller/auth/signup_controller.dart';
+import 'package:ecommerce_course/core/class/handlingdataview.dart';
 import 'package:ecommerce_course/core/constatnt/constantColor.dart';
 import 'package:ecommerce_course/view/widget/onboarding/auth/textfieldauth.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,8 @@ class SignUpPage extends StatelessWidget {
 
       ),
       body:  GetBuilder<SignUpControllerImp>(builder: (controller){
-        return Container(
+        return HandlingDataRequest(statusRequest: controller.statusRequest,
+         widget: Container(
         padding:const  EdgeInsets.symmetric(horizontal: 50,vertical: 25),
         child: Form(
           key: controller.formState,
@@ -128,7 +130,7 @@ class SignUpPage extends StatelessWidget {
             ]
           ),
         ),
-      );
+      ));
       })
     );
   }

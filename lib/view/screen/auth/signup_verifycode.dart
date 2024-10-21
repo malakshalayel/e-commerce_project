@@ -1,17 +1,17 @@
-import 'package:ecommerce_course/controller/auth/forget_password/verifyCode_controller.dart';
-import 'package:ecommerce_course/core/class/handlingdataview.dart';
+import 'package:ecommerce_course/controller/auth/verifycodesignup.dart';
+import 'package:ecommerce_course/core/class/statusrequest.dart';
 import 'package:ecommerce_course/core/constatnt/constantColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-class VerifyCode extends StatelessWidget {
+class VerifyCodeSignup extends StatelessWidget {
    
 
- const  VerifyCode({super.key});
+ const  VerifyCodeSignup({super.key});
 
   @override
   Widget build(BuildContext context) {
-    VerifyCodeControllerImp controller =Get.put(VerifyCodeControllerImp());
+    Get.put(VerifyCodesignupControllerImp());
     return Scaffold(
       appBar: AppBar( 
         leading: const Icon(Icons.arrow_back, color: AppColor.greyColor,),
@@ -19,11 +19,10 @@ class VerifyCode extends StatelessWidget {
         centerTitle: true,
 
       ),
-      
-      
-      body: GetBuilder<VerifyCodeControllerImp>(builder: (controller)=> HandlingDataRequest(
-        statusRequest: controller.statusRequest,
-         widget:  Container(
+      body:  GetBuilder<VerifyCodesignupControllerImp>(builder: (controller)=> 
+      controller.statusRequest== StatusRequest.loading 
+      ? Center(child: Text("loading...."))
+      : Container(
         padding:const EdgeInsets.symmetric(horizontal: 50,vertical: 25),
         child: ListView( 
           
@@ -44,13 +43,14 @@ class VerifyCode extends StatelessWidget {
         },
         //runs when every textfield is filled
         onSubmit: (String verificationCode){
-           controller.goToResetpass(verificationCode);
+           controller.goToSuccessSignUp(verificationCode);
         }, // end onSubmit
-    ), 
-        
-          ]
+            ),
+        ]
         ),
-      )))
+      )
+
+      )
     );
   }
 }

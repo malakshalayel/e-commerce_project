@@ -1,4 +1,6 @@
 import 'package:ecommerce_course/controller/auth/forget_password/resetpass_controller.dart';
+import 'package:ecommerce_course/core/class/handlingdataview.dart';
+import 'package:ecommerce_course/core/class/statusrequest.dart';
 import 'package:ecommerce_course/core/constatnt/constantColor.dart';
 import 'package:ecommerce_course/view/widget/onboarding/auth/textfieldauth.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ class ResetPass extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ResetPassControllerImp controller = Get.put(ResetPassControllerImp());
+     Get.put(ResetPassControllerImp());
     return Scaffold(
         appBar: AppBar(
           leading: const Icon(
@@ -24,81 +26,88 @@ class ResetPass extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
-          child: Form(
-              key: controller.fromState,
-              child: GetBuilder<ResetPassControllerImp>(
-                builder: (controller) => ListView(children: [
-                  Text(
-                    "34".tr,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 30,
-                    ),
+
+
+        body: GetBuilder<ResetPassControllerImp>(builder: 
+        (controller)=> HandlingDataRequest(statusRequest: controller.statusRequest,
+         widget:  Form(
+          key: controller.fromState,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+            child: GetBuilder<ResetPassControllerImp>(
+              builder: (controller) => ListView(children: [
+                Text(
+                  "34".tr,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 30,
                   ),
-                  Text(
-                    " ",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontSize: 14,
-                        ),
+                ),
+                Text(
+                  " ",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontSize: 14,
+                      ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFieldSignIN(
+                  obscureText: controller.isShowPass,
+                  onTapicon: controller.showPassword,
+                  isNumber: true,
+                  valid: (val) {
+                    return validInput(val!, 5, 100, "password");
+                  },
+                  myController: controller.repassController,
+                  hinttext: "35".tr,
+                  labeltext: "19".tr,
+                  icon: const Icon(
+                    Icons.lock_outline,
+                    color: AppColor.greyColor,
                   ),
-                  const SizedBox(
-                    height: 20,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFieldSignIN(
+                  obscureText: controller.isShowPass,
+                  onTapicon: controller.showPassword,
+                  isNumber: true,
+                  valid: (val) {
+                    return validInput(val!, 5, 100, "password");
+                  },
+                  myController: controller.passController,
+                  hinttext: "confirm your password",
+                  labeltext: "19".tr,
+                  icon: const Icon(
+                    Icons.lock_outline,
+                    color: AppColor.greyColor,
                   ),
-                  TextFieldSignIN(
-                    obscureText: controller.isShowPass,
-                    onTapicon: controller.showPassword,
-                    isNumber: true,
-                    valid: (val) {
-                      return validInput(val!, 5, 100, "password");
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                MaterialButton(
+                    onPressed: () {
+                      controller.goToSuccessReset();
                     },
-                    myController: controller.repassController,
-                    hinttext: "35".tr,
-                    labeltext: "19".tr,
-                    icon: const Icon(
-                      Icons.lock_outline,
-                      color: AppColor.greyColor,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFieldSignIN(
-                    obscureText: controller.isShowPass,
-                    onTapicon: controller.showPassword,
-                    isNumber: true,
-                    valid: (val) {
-                      return validInput(val!, 5, 100, "password");
-                    },
-                    myController: controller.passController,
-                    hinttext: "confirm your password",
-                    labeltext: "19".tr,
-                    icon: const Icon(
-                      Icons.lock_outline,
-                      color: AppColor.greyColor,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  MaterialButton(
-                      onPressed: () {
-                        controller.goToSuccessReset();
-                      },
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      color: AppColor.primeryColor,
-                      // color: const Color.fromARGB(255, 248, 120, 120),
-                      child: Text("33".tr)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ]),
-              )),
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    color: AppColor.primeryColor,
+                    // color: const Color.fromARGB(255, 248, 120, 120),
+                    child: Text("33".tr)),
+                const SizedBox(
+                  height: 10,
+                ),
+              ]),
+            ),
+          ),
+        ))
+       
         ));
   }
 }

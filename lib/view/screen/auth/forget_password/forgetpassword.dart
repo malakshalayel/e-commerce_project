@@ -1,4 +1,6 @@
-import 'package:ecommerce_course/controller/auth/forget_password/forgetpass_controller.dart';
+import 'package:ecommerce_course/controller/auth/forget_password/checkemail_controller.dart';
+import 'package:ecommerce_course/core/class/handlingdataview.dart';
+import 'package:ecommerce_course/core/class/statusrequest.dart';
 import 'package:ecommerce_course/core/constatnt/constantColor.dart';
 import 'package:ecommerce_course/view/widget/onboarding/auth/textfieldauth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,7 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ForgetPassControllerImp controller =Get.put(ForgetPassControllerImp());
+    Get.put(ForgetPassControllerImp());
     return Scaffold(
       appBar: AppBar( 
         leading: const Icon(Icons.arrow_back, color: AppColor.greyColor,),
@@ -21,10 +23,12 @@ class ForgetPassword extends StatelessWidget {
         centerTitle: true,
 
       ),
-      body:  Container(
+      body: GetBuilder<ForgetPassControllerImp>(builder: (controller) =>HandlingDataRequest(
+        statusRequest: controller.statusRequest,
+         widget: Container(
         padding:const EdgeInsets.symmetric(horizontal: 50,vertical: 25),
         child: Form(
-          key: controller.fromState,
+          key: controller.formState,
           child: ListView( 
             
             children: [ 
@@ -67,6 +71,7 @@ class ForgetPassword extends StatelessWidget {
             ]
           ),
         ),
+      ))
       )
     );
   }
